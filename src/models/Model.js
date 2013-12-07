@@ -25,7 +25,7 @@ THE SOFTWARE.
 /*global Class, Emitter, XMLHttpRequest, merge*/
 import event.Emitter as Emitter;
 
-var ENDPOINT_PREFIX = 'http://162.243.132.235:8080/api/';
+var ENDPOINT_PREFIX = 'http://162.243.132.235/api/';
 
 exports = Class(Emitter, function (supr) {
 	this.init = function (id, endpoint, values, defaults) {
@@ -171,7 +171,7 @@ exports = Class(Emitter, function (supr) {
 			}
 			callback && callback();
 		}.bind(this);
-		xhr.open(hasId ? 'put' : 'post', this._endpoint + (hasId ? '/' + this._id : ''));
+		xhr.open(hasId ? 'put' : 'post', this._endpoint + '/' + (hasId ? this._id : 'create'));
 		xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
 		var content = JSON.stringify(merge({ id: this._id, }, this._modelValues));
 		xhr.send(content);

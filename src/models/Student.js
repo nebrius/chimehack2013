@@ -23,7 +23,7 @@ THE SOFTWARE.
 */
 
 /*global Class, Model*/
-import src.Model as Model;
+import .Model as Model;
 
 exports = Class(Model, function (supr) {
 	this.init = function (id, values) {
