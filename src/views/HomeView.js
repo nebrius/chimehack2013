@@ -8,7 +8,7 @@ import device;
 import ui.ScrollView as ScrollView;
 import src.views.MapView as MapView;
 
-exports = Class(ScrollView, function (supr) {
+exports = Class(View, function (supr) {
 
 	this.init = function(opts) {
 
@@ -17,13 +17,13 @@ exports = Class(ScrollView, function (supr) {
 		opts = merge(opts, {
 			x: 0,
 			y: 0,
-			scrollX: false,
-			useLayoutBounds: true,
-            scrollBounds: {
-            	minX: 0,
-            	minY: 0
-            },
-			bounceRadius: 150,
+			//scrollX: false,
+			//useLayoutBounds: true,
+            //scrollBounds: {
+            //	minX: 0,
+            //	minY: 0
+            //},
+			//bounceRadius: 150,
 			width: gameConstants.GAME_WIDTH,
 			height: gameConstants.GAME_HEIGHT,
 			backgroundColor: '#ef6e07'
@@ -49,8 +49,6 @@ exports = Class(ScrollView, function (supr) {
 
 	this.buildView = function() {
 
-
-
 		this.background = new ImageView({
 			parent: this,
 			x: 0,
@@ -63,7 +61,7 @@ exports = Class(ScrollView, function (supr) {
 
 		var mapView = new MapView();
 
-		//this.addSubview(mapView);
+		this.addSubview(mapView);
 
 		this.hiText = new TextView({
 			parent: this,
@@ -133,7 +131,7 @@ exports = Class(ScrollView, function (supr) {
 		    },
 		    on: {
 		      up: bind(this, function () {
-		      		this.emit('Donate');
+		      		//this.emit('Donate');
 				})		      
 		    }
     	});

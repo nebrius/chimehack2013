@@ -14,7 +14,7 @@ exports = Class(View, function (supr) {
 			y: 0,
 			width: gameConstants.GAME_WIDTH,
 			height: gameConstants.GAME_HEIGHT,
-			backgroundColor: '#000000'
+			backgroundColor: '#ef6e07'
 		});
 
 		supr(this, 'init', [opts]);
