@@ -6,23 +6,26 @@ import ui.widget.ButtonView as ButtonView;
 import ui.TextEditView as TextEditView;
 import device;
 import src.views.ErrorView as ErrorView;
-import src.collections.Students as StudentsCollection;
+import src.collections.Students as StudentCollection;
+import src.collections.Donors as DonorCollection;
+import src.collections.Donations as DonationCollection;
 
 exports = Class(View, function (supr) {
 
-	var loginSemaphore = 2;
+	var loginSemaphore = 4;
 	function login(err) {
 		loginSemaphore--;
 		if (err) {
 			alert('Error connecting to server');
 		} else if (!loginSemaphore) {
 			var username = this.usernameEditView.getText(),
-				student = this._studentCollection.modelWithId(username);
+				student = GLOBAL.gameData.studentCollection.modelWithId(username);
 			if (!student) {
 				// TODO: invalid username, show error
 				alert('Unknown student ' + username)
 			} else {
-				GLOBAL.student = student;
+				GLOBAL.gameData.student = student;
+				debugger;
 				this.emit('start');
 			}
 		}
@@ -41,7 +44,14 @@ exports = Class(View, function (supr) {
 
 		this.buildView();
 
-		(this._studentCollection = new StudentsCollection()).fetch(login.bind(this));
+		GLOBAL.gameData = {
+			studentCollection: new StudentCollection(),
+			donorCollection: new DonorCollection(),
+			donationCollection: new DonationCollection()
+		};
+		GLOBAL.gameData.studentCollection.fetch(login.bind(this));
+		GLOBAL.gameData.donorCollection.fetch(login.bind(this));
+		GLOBAL.gameData.donationCollection.fetch(login.bind(this));
 	};
 
 	this.buildView = function() {

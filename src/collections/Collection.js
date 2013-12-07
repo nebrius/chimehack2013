@@ -141,7 +141,23 @@ exports = Class(Emitter, function (supr) {
 		});
 	};
 
-	this.filter = function (filter) {};
+	this.filter = function (filter) {
+		var results = [];
+		this._models.forEach(function (model) {
+			var fits = true;
+			for (var attribute in filter) {
+				if (typeof filter[attribute] == 'function') {
+					fits = fits && filter[attribute](model.get(attribute));
+				} else if (model.get(attribute) !== filter[attribute]) {
+					fits = false;
+				}
+			}
+			if (fits) {
+				results.push(model);
+			}
+		});
+		return results;
+	};
 
 	this.values = function () {
 		return this._models;

@@ -65,10 +65,6 @@ exports = Class(GC.Application, function () {
 		var leaderboardView = new LeaderboardView();
 		var donateView = new DonateView();
 
-		//titleView.on('Signin', function () {
-		//	this.gameModel.getCurrentUser();
-		//});
-
 		homeView.on('Donate', function () {
 			rootView.push(donateView);
 		});
