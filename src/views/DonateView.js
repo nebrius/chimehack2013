@@ -4,6 +4,7 @@ import src.constants.gameConstants as gameConstants;
 import ui.TextView as TextView;
 import ui.widget.ButtonView as ButtonView;
 import src.lib.parseUtil as ParseUtil;
+import ui.TextEditView as TextEditView;
 
 exports = Class(View, function (supr) {
 
@@ -22,29 +23,19 @@ exports = Class(View, function (supr) {
 		this.buildView();
 	};
 
-	this.submitDonation = function (email, amount) {
-		GLOBAL.gameData.donationCollection.add(new Donation({
-			amount: amount,
-			time: new Date(),
-			student: GLOBAL.gameData.student.get('id'),
-			donor: email
-		}));
-		GLOBAL.gameData.donationCollection.save();
-	};
-
 	this.buildView = function() {
 
-		/*this.background = new ImageView({
+		this.background = new ImageView({
 			parent: this,
 			x: 0,
 			y: 0,
 			width: gameConstants.GAME_WIDTH,
-			height: gameConstants.GAME_HEIGHT,
-			image: "resources/images/backgrounds/home.png",
+			height: 960,
+			image: "resources/images/backgrounds/donation_bg.png",
 			opacity: 1
-		});*/
+		});
 
-		this.TitleText = new TextView({
+		/*this.TitleText = new TextView({
 			parent: this,
 			x: gameConstants.GAME_WIDTH / 2 - 180,
 			y: 100,
@@ -55,40 +46,68 @@ exports = Class(View, function (supr) {
 			color: 'white',
 			size: 50,
 			canHandleEvents: false
-		});
+		});*/
 
     	this.BackButton = new ButtonView({
 		    superview: this,
-		    width: 130,
-		    height: 70,
-		    x: 10,
+		    width: 80,
+		    height: 80,
+		    x: 480,
 		    y: 10,
 		    images: {
-		      up: "resources/images/buttons/brown_button_up.png",
-		      down: "resources/images/buttons/brown_button_down.png"
-		    },
-		    scaleMethod: "9slice",
-		    sourceSlices: {
-		      horizontal: {left: 80, center: 116, right: 80},
-		      vertical: {top: 10, middle: 80, bottom: 10}
-		    },
-		    destSlices: {
-		      horizontal: {left: 40, right: 40},
-		      vertical: {top: 4, bottom: 4}
+		      up: "resources/images/buttons/close_button.png"
+		      //down: "resources/images/buttons/brown_button_down.png"
 		    },
 		    on: {
 		      up: bind(this, function () {
 		      		this.emit('Back');
-				})
-		    },
-		    title: "Back",
-		    text: {
-		      color: "#ffffff",
-		      size: 36,
-		      fontFamily: gameConstants.MAIN_FONT,
-		      autoFontSize: false,
-		      autoSize: false
+				})		      
 		    }
     	});
+
+		this.customAmountEditView = new TextEditView({
+			superview: this,
+			x: 30,
+			y: 425,
+			//backgroundColor: "#ffffff",
+			width: 456,
+			height: 80,
+			fontWeight: "bold",
+			//horizontalAlign: "center",
+			color: "#ffffff",
+			hintColor: "#ffffff",
+			hint: "Enter Custom Amount"
+		});
+
+		this.emailEditView = new TextEditView({
+			superview: this,
+			x: 30,
+			y: 530,
+			//backgroundColor: "#ffffff",
+			width: 456,
+			height: 80,
+			fontWeight: "bold",
+			//horizontalAlign: "center",
+			color: "#ef7c21",
+			hintColor: "#ef7c21",
+			hint: "Enter Email"
+		});
+
+    	this.donateButton = new ButtonView({
+			superview: this,
+			width: 190,
+			height: 125,
+			x: gameConstants.GAME_WIDTH / 2 - 100,
+			y: 670,
+			images: {
+				up: "resources/images/buttons/login_button.png"
+				//down: "resources/images/buttons/brown_button_down.png"
+			},
+			on: {
+				up: bind(this, function () {
+					this.emit('Back');
+				})
+			}
+		});
 	};
 });
