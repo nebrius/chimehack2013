@@ -21,10 +21,10 @@ exports = Class(DialogBackgroundView, function (supr) {
 
 		this._dialogView = new BoxDialogView({
 			superview: this._dialogContainerView,
-			x: 100,
-			y: 200,
-			width: gameConstants.GAME_WIDTH - 140,
-			height: gameConstants.GAME_HEIGHT - 340,
+			x: 60,
+			y: 240,
+			width: gameConstants.GAME_WIDTH - 100,
+			height: gameConstants.GAME_HEIGHT - 370,
 			title: 'Map Item',
 			closeCB: opts.closeCB ? bind(this, 'hide', opts.closeCB) : false,
 			backCB: opts.backCB ? bind(this, 'hide', opts.backCB) : false

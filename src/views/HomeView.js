@@ -7,6 +7,7 @@ import src.lib.parseUtil as ParseUtil;
 import device;
 import ui.ScrollView as ScrollView;
 import src.views.MapView as MapView;
+import src.views.MapItemView as MapItemView;
 
 import src.models.Donation as Donation;
 
@@ -62,6 +63,11 @@ exports = Class(View, function (supr) {
 			}.bind(this));
 		}.bind(this));
 
+ 		this.mapItemView = new MapItemView({
+
+		});
+		this.addSubview(this.mapItemView);
+
 		this.background = new ImageView({
 			parent: this,
 			x: 0,
@@ -72,7 +78,7 @@ exports = Class(View, function (supr) {
 			opacity: 1
 		});
 
-		var mapView = new MapView();
+		var mapView = new MapView({parent: this});
 
 		this.addSubview(mapView);
 
