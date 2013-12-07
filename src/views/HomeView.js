@@ -8,6 +8,8 @@ import device;
 import ui.ScrollView as ScrollView;
 import src.views.MapView as MapView;
 
+import src.models.Donation as Donation;
+
 exports = Class(View, function (supr) {
 
 	this.init = function(opts) {
@@ -48,6 +50,17 @@ exports = Class(View, function (supr) {
 	}
 
 	this.buildView = function() {
+
+		GLOBAL.gameData.on('loaded', function () {
+			this.usernameText.setText(GLOBAL.gameData.student.get('name'));
+			GLOBAL.gameData.donationCollection.on('added', function () {
+				this.donationAmountText.setText('$' + GLOBAL.gameData.donationCollection.filter({
+					student: GLOBAL.gameData.student.get('id')
+				}).reduce(function (sum, model) {
+					return sum + model.get('amount');
+				}, 0).toFixed(2));
+			}.bind(this));
+		}.bind(this));
 
 		this.background = new ImageView({
 			parent: this,
@@ -91,9 +104,6 @@ exports = Class(View, function (supr) {
 			canHandleEvents: false
 		});
 
-		GLOBAL.gameData.on('loaded', function () {
-			this.usernameText.setText(GLOBAL.gameData.student.get('name'));
-		}.bind(this));
 		this.usernameText = new TextView({
 			parent: this,
 			x: 210,
@@ -115,7 +125,7 @@ exports = Class(View, function (supr) {
 			width: 200,
 			height: 100,
 			horizontalAlign: 'left',
-			text: "$100.5",
+			text: "$0.00",
 			fontFamily: gameConstants.MAIN_FONT,
 			color: '#3e3e3e',
 			size: 44,

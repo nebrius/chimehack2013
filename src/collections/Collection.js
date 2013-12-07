@@ -76,6 +76,12 @@ exports = Class(Emitter, function (supr) {
 			err = e.target.status;
 		};
 		xhr.onreadystatechange = function () {
+			function fetchResponse() {
+				semaphoreCount--;
+				if (!semaphoreCount) {
+					callback && callback();
+				}
+			}
 			if (xhr.readyState == 4) {
 				if (xhr.status != 200) {
 					callback && callback(err || 'HTTP request failed with code ' + xhr.status);
@@ -89,12 +95,6 @@ exports = Class(Emitter, function (supr) {
 					callback && callback(e.toString());
 					return;
 				}
-				function fetchResponse() {
-					semaphoreCount--;
-					if (!semaphoreCount) {
-						callback && callback();
-					}
-				}
 				for (var id in response) {
 					var found;
 					for (var i = 0, len = this._models.length; i < len; i++) {
@@ -106,7 +106,7 @@ exports = Class(Emitter, function (supr) {
 					}
 					if (!found) {
 						var newModel = new this._constructor({ id: id });
-						this._models.push(newModel);
+						this.add(newModel);
 						semaphoreCount++;
 						newModel.fetch(fetchResponse);
 					}
