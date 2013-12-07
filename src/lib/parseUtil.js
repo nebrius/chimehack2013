@@ -13,7 +13,7 @@ this.signUp = function(username, password) {
 	var user = new Parse.Parse.User();
 	user.set("username", username);
 	user.set("password", password);
-	user.set("email", username);
+	//user.set("email", username);
 	 
 	user.signUp(this, {
 	  success: function(user) {

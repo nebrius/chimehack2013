@@ -6,6 +6,7 @@ import ui.widget.ButtonView as ButtonView;
 import src.lib.parseUtil as ParseUtil;
 import device;
 import ui.ScrollView as ScrollView;
+import src.views.MapView as MapView;
 
 exports = Class(ScrollView, function (supr) {
 
@@ -48,45 +49,82 @@ exports = Class(ScrollView, function (supr) {
 
 	this.buildView = function() {
 
-		/*this.background = new ImageView({
+
+
+		this.background = new ImageView({
 			parent: this,
 			x: 0,
 			y: 0,
 			width: gameConstants.GAME_WIDTH,
 			height: gameConstants.GAME_HEIGHT,
-			image: "resources/images/backgrounds/home.png",
+			image: "resources/images/backgrounds/home_bg.jpg",
 			opacity: 1
-		});*/
-		this.tempText = new TextView({
+		});
+
+		var mapView = new MapView();
+
+		//this.addSubview(mapView);
+
+		this.hiText = new TextView({
 			parent: this,
-			x: gameConstants.GAME_WIDTH / 2 - 220,
-			y: 100,
-			width: 450,
-			height: 150,
-			text: "",
+			x: 170,
+			y: 75,
+			width: 200,
+			height: 100,
+			horizontalAlign: 'left',
+			text: "Hi,",
 			fontFamily: gameConstants.MAIN_FONT,
 			size: 28,
-			color: 'white',
+			color: '#ef7c21',
 			canHandleEvents: false
 		});
 
-		this.TitleText = new TextView({
+		this.youhaveraisedText = new TextView({
 			parent: this,
-			x: gameConstants.GAME_WIDTH / 2 - 150,
-			y: 50,
-			width: 350,
-			height: 150,
-			text: "Home View",
+			x: 170,
+			y: 125,
+			width: 200,
+			height: 100,
+			horizontalAlign: 'left',
+			text: "You have raised",
 			fontFamily: gameConstants.MAIN_FONT,
-			color: 'white',
-			size: 50,
+			color: '#ef7c21',
+			size: 28,
+			canHandleEvents: false
+		});
+
+		this.usernameText = new TextView({
+			parent: this,
+			x: 210,
+			y: 72,
+			width: 200,
+			height: 100,
+			horizontalAlign: 'left',
+			text: "username",
+			fontFamily: gameConstants.MAIN_FONT,
+			color: '#3e3e3e',
+			size: 34,
+			canHandleEvents: false
+		});
+
+		this.donationAmountText = new TextView({
+			parent: this,
+			x: 390,
+			y: 120,
+			width: 200,
+			height: 100,
+			horizontalAlign: 'left',
+			text: "$100.5",
+			fontFamily: gameConstants.MAIN_FONT,
+			color: '#3e3e3e',
+			size: 44,
 			canHandleEvents: false
 		});
 
 		this.HomeButton = new ButtonView({
 		    superview: this,
 		    width: 80,
-		    height: 80,
+		    height: 76,
 		    x: 20,
 		    y: 930,
 		    images: {

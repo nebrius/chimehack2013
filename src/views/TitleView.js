@@ -23,7 +23,7 @@ exports = Class(View, function (supr) {
 
 		this.buildView();
 
-		//this.parseUtil = new ParseUtil();
+		this.parseUtil = new ParseUtil();
 		//this.currentUser = this.parseUtil.currentUser();
 	};
 
@@ -58,7 +58,7 @@ exports = Class(View, function (supr) {
 			canHandleEvents: false
 		});*/
 
-		this._textEditView = new TextEditView({
+		this.accessCodeEditView = new TextEditView({
 	      	superview: this,
 		  	x: 160,
 			y: 380,
@@ -72,7 +72,7 @@ exports = Class(View, function (supr) {
 	      	hint: "Enter Access Code"
 	    });
 
-	    this._textEditView = new TextEditView({
+	    this.passwordEditView = new TextEditView({
 	      	superview: this,
 		  	x: 160,
 			y: 500,
@@ -99,7 +99,7 @@ exports = Class(View, function (supr) {
 		    on: {
 		      up: bind(this, function () {
 
-		      		//this.parseUtil.signUp(this._textPromptView.getText(),'battlefour');
+		      		//this.parseUtil.signUp(this.accessCodeEditView,this.passwordEditView);
 
 				    this.emit('Start');
 				})		      

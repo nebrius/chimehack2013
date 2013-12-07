@@ -7,6 +7,8 @@ import src.views.ErrorView as ErrorView;
 import src.views.HomeView as HomeView;
 import src.views.LeaderboardView as LeaderboardView;
 import src.views.TitleView as TitleView;
+import src.views.Instruction1View as Instruction1View;
+import src.views.Instruction2View as Instruction2View;
 import ui.View as View;
 import ui.StackView as StackView;
 import src.lib.parse as Parse;
@@ -31,7 +33,7 @@ exports = Class(GC.Application, function () {
 
 		//this.scaleUI();
 		//logger.log(Parse.Parse.VERSION);
-		//Parse.Parse.initialize("J3gALSUBlUMfOSAGHyaEqXGVmyrlXOOsa8TiCh7u", "0gqBOcrMEu08EdlaHaszYexc9o4LXuua4UeY2jYC");
+		Parse.Parse.initialize("J3gALSUBlUMfOSAGHyaEqXGVmyrlXOOsa8TiCh7u", "0gqBOcrMEu08EdlaHaszYexc9o4LXuua4UeY2jYC");
 
 		/*ajax.post({
 		  'url':'https://api.parse.com/1/events/AppOpened',
@@ -62,17 +64,26 @@ exports = Class(GC.Application, function () {
 			clip: true,
 			backgroundColor: '#000000'
 		});
-
+		
+		var instruction1View = new Instruction1View();
+		var instruction2View = new Instruction2View();
 		var homeView = new HomeView();
-
 		var titleView = new TitleView();
 
 		titleView.on('Start', function () {
-			rootView.push(homeView);
-			homeView.load();
+			rootView.push(instruction1View);
 		});
 
 		rootView.push(titleView);
+
+		instruction1View.on('Continue', function () {
+			rootView.push(instruction2View);
+		});
+
+		instruction2View.on('Continue', function () {
+			rootView.push(homeView);
+			homeView.load();
+		});
 
 		var leaderboardView = new LeaderboardView();
 		var donateView = new DonateView();
