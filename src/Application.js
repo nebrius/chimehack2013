@@ -12,6 +12,7 @@ import src.views.Instruction2View as Instruction2View;
 import ui.View as View;
 import ui.StackView as StackView;
 import util.ajax as ajax;
+import event.Emitter as Emitter;
 
 var BOUNDS_WIDTH = 576;
 var BOUNDS_HEIGHT = 1024;
@@ -31,6 +32,8 @@ exports = Class(GC.Application, function () {
 		});
 
 		this.scaleUI();
+
+		GLOBAL.gameData = new Emitter();
 
 		var rootView = new StackView({
 			superview: this,

@@ -24,9 +24,10 @@ exports = Class(View, function (supr) {
 				// TODO: invalid username, show error
 				alert('Unknown student ' + username)
 			} else {
+				console.log(username + ' successfully logged in');
 				GLOBAL.gameData.student = student;
-				debugger;
-				this.emit('start');
+				GLOBAL.gameData.emit('loaded');
+				this.emit('Start');
 			}
 		}
 	}
@@ -44,14 +45,9 @@ exports = Class(View, function (supr) {
 
 		this.buildView();
 
-		GLOBAL.gameData = {
-			studentCollection: new StudentCollection(),
-			donorCollection: new DonorCollection(),
-			donationCollection: new DonationCollection()
-		};
-		GLOBAL.gameData.studentCollection.fetch(login.bind(this));
-		GLOBAL.gameData.donorCollection.fetch(login.bind(this));
-		GLOBAL.gameData.donationCollection.fetch(login.bind(this));
+		(GLOBAL.gameData.studentCollection = new StudentCollection()).fetch(login.bind(this));
+		(GLOBAL.gameData.donorCollection = new DonorCollection()).fetch(login.bind(this));
+		(GLOBAL.gameData.donationCollection = new DonationCollection()).fetch(login.bind(this));
 	};
 
 	this.buildView = function() {

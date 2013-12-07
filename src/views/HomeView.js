@@ -38,12 +38,12 @@ exports = Class(View, function (supr) {
 		//this.parseUtil = new ParseUtil();
 		//this.parseUtil.on('GamesLoaded', bind(this, 'onGamesLoaded'));
 		//this.currentUser = this.parseUtil.currentUser();
-		
+
 		/*if (this.currentUser) {
 		    this.parseUtil.getGames(this.currentUser);
 		    this.currentUserText.setText('Current User: ' + this.currentUser.attributes.username);
 		} else {
-		    // show the signup or login page  
+		    // show the signup or login page
 		}*/
 	}
 
@@ -91,6 +91,9 @@ exports = Class(View, function (supr) {
 			canHandleEvents: false
 		});
 
+		GLOBAL.gameData.on('loaded', function () {
+			this.usernameText.setText(GLOBAL.gameData.student.get('name'));
+		}.bind(this));
 		this.usernameText = new TextView({
 			parent: this,
 			x: 210,
@@ -132,7 +135,7 @@ exports = Class(View, function (supr) {
 		    on: {
 		      up: bind(this, function () {
 		      		//this.emit('Donate');
-				})		      
+				})
 		    }
     	});
 
@@ -149,7 +152,7 @@ exports = Class(View, function (supr) {
 		    on: {
 		      up: bind(this, function () {
 		      		this.emit('Donate');
-				})		      
+				})
 		    }
     	});
 
@@ -166,7 +169,7 @@ exports = Class(View, function (supr) {
 		    on: {
 		      up: bind(this, function () {
 		      		this.emit('Donate');
-				})		      
+				})
 		    }
     	});
 
@@ -183,7 +186,7 @@ exports = Class(View, function (supr) {
 		    on: {
 		      up: bind(this, function () {
 		      		this.emit('LoadLeaderboard');
-				})		      
+				})
 		    }
     	});
 
@@ -200,7 +203,7 @@ exports = Class(View, function (supr) {
 		    on: {
 		      up: bind(this, function () {
 		      		this.emit('LoadLeaderboard');
-				})		      
+				})
 		    }
     	});
 	};
