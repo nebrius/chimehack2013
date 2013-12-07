@@ -25,14 +25,13 @@ THE SOFTWARE.
 /*global Class, Emitter, XMLHttpRequest, merge*/
 import event.Emitter as Emitter;
 
-var ENDPOINT_PREFIX = 'http://162.243.132.235/api/';
+var ENDPOINT_PREFIX = 'http://localhost:8080/api/';
 
 exports = Class(Emitter, function (supr) {
-	this.init = function (id, endpoint, values, defaults) {
+	this.init = function (endpoint, values, defaults) {
 		supr(this, 'init', arguments);
 		this._modelAttributes = {};
 		this._modelValues = {};
-		this._id = id;
 		this._endpoint = ENDPOINT_PREFIX + endpoint;
 		values = merge(values || {}, defaults || {});
 		for (var attribute in values) {
@@ -90,27 +89,19 @@ exports = Class(Emitter, function (supr) {
 	};
 
 	/**
-	 * Gets the model id (key in the database). The id is not present as an attribute
-	 *
-	 * id() -> number
-	 */
-	this.id = function () {
-		return this._id;
-	};
-
-	/**
 	 * Fetches the appropriate model from the server and populates the attributes
 	 *
 	 * fetch(callback) -> undefined
 	 *	- callback <Function(error)> The callback to call. Error is a string if an error occured, undefined otherwise
 	 */
 	this.fetch = function (callback) {
-		if (typeof this._id == 'undefined') {
-			throw new Error('Attempted to fetch a model without an id');
-		}
 
 		var xhr = new XMLHttpRequest(),
+			id = this.get('id'),
 			err;
+		if (typeof id == 'undefined') {
+			throw new Error('Attempted to fetch a model without an id');
+		}
 		xhr.onerror = function(e) {
 			err = e.target.status;
 		};
@@ -133,7 +124,7 @@ exports = Class(Emitter, function (supr) {
 				callback && callback();
 			}
 		}.bind(this);
-		xhr.open('get', this._endpoint + '/' + this._id);
+		xhr.open('get', this._endpoint + '/' + id);
 		xhr.send();
 	};
 
@@ -146,7 +137,7 @@ exports = Class(Emitter, function (supr) {
 	 */
 	this.save = function (callback) {
 		var xhr = new XMLHttpRequest(),
-			hasId = typeof this._id != 'undefined',
+			id = this.get('id'),
 			err;
 		xhr.onerror = function(e) {
 			err = e.target.status;
@@ -163,17 +154,14 @@ exports = Class(Emitter, function (supr) {
 				callback && callback(e.toString());
 				return;
 			}
-			this._id = response.id;
 			for (var attribute in response) {
-				if (attribute != 'id') {
-					this.set(attribute, response[attribute]);
-				}
+				this.set(attribute, response[attribute]);
 			}
 			callback && callback();
 		}.bind(this);
-		xhr.open(hasId ? 'put' : 'post', this._endpoint + '/' + (hasId ? this._id : 'create'));
+		xhr.open('put', this._endpoint + (typeof id == 'undefined' ? '' : '/' + id));
 		xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-		var content = JSON.stringify(merge({ id: this._id, }, this._modelValues));
+		var content = JSON.stringify(this._modelValues);
 		xhr.send(content);
 	};
 });

@@ -27,14 +27,11 @@ import .Model as Model;
 
 exports = Class(Model, function (supr) {
 	this.init = function (values) {
-		supr(this, 'init', [ 'student', values, {
-			id: '',
-			password: '',
-			name: '',
-			school: '',
-			grade: 0,
-			classname: '',
-			level: 0
+		supr(this, 'init', [ 'donation', values, {
+			amount: 0,
+			time: new Date(),
+			student: -1,
+			donor: -1
 		}]);
 	};
 });

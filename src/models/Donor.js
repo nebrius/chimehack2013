@@ -26,8 +26,9 @@ THE SOFTWARE.
 import .Model as Model;
 
 exports = Class(Model, function (supr) {
-	this.init = function (id, values) {
-		supr(this, 'init', [ id, 'donors', values, {
+	this.init = function (values) {
+		supr(this, 'init', [ 'donor', values, {
+			id: '',
 			name: '',
 			email: ''
 		}]);
