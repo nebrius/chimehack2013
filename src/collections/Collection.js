@@ -27,7 +27,8 @@ import event.Emitter as Emitter;
 import ..models.Model as Model;
 
 var LOCAL = false,
-	ENDPOINT_PREFIX = 'http://' + (LOCAL ? 'localhost' : '192.241.239.220') + ':8080/api/';
+	ENDPOINT_PREFIX = 'http://' + (LOCAL ? 'localhost' : '192.241.239.220') + ':8080/api/',
+	SYNC_INTERVAL = 5000;
 
 exports = Class(Emitter, function (supr) {
 	this.init = function (endpoint, constructor, models) {
@@ -67,6 +68,14 @@ exports = Class(Emitter, function (supr) {
 			location: location,
 			model: model
 		});
+	};
+
+	this.keepInSync = function () {
+		setInterval(function () {
+			if (!this._saving) {
+				this.fetch();
+			}
+		}.bind(this), SYNC_INTERVAL);
 	};
 
 	this.fetch = function (callback) {
@@ -124,6 +133,7 @@ exports = Class(Emitter, function (supr) {
 	};
 
 	this.save = function (callback) {
+		this._saving = true;
 		var semaphoreCount = this._models.length;
 
 		function saveResponse(err) {
@@ -132,6 +142,7 @@ exports = Class(Emitter, function (supr) {
 				semaphoreCount = 0;
 			}
 			if (!semaphoreCount) {
+				this._saving = false;
 				callback && callback(err);
 			}
 		}

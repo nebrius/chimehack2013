@@ -25,6 +25,9 @@ exports = Class(View, function (supr) {
 				alert('Unknown student ' + username)
 			} else {
 				console.log(username + ' successfully logged in');
+				GLOBAL.gameData.studentCollection.keepInSync();
+				GLOBAL.gameData.donorCollection.keepInSync();
+				GLOBAL.gameData.donationCollection.keepInSync();
 				GLOBAL.gameData.student = student;
 				GLOBAL.gameData.emit('loaded');
 				this.emit('Start');
