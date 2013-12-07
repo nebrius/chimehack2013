@@ -52,7 +52,7 @@ exports = Class(View, function (supr) {
 		    superview: this,
 		    width: 80,
 		    height: 80,
-		    x: 400,
+		    x: 480,
 		    y: 10,
 		    images: {
 		      up: "resources/images/buttons/close_button.png"
@@ -67,8 +67,8 @@ exports = Class(View, function (supr) {
 
 		this.customAmountEditView = new TextEditView({
 			superview: this,
-			x: 160,
-			y: 380,
+			x: 30,
+			y: 425,
 			//backgroundColor: "#ffffff",
 			width: 456,
 			height: 80,
@@ -81,8 +81,8 @@ exports = Class(View, function (supr) {
 
 		this.emailEditView = new TextEditView({
 			superview: this,
-			x: 160,
-			y: 500,
+			x: 30,
+			y: 530,
 			//backgroundColor: "#ffffff",
 			width: 456,
 			height: 80,
