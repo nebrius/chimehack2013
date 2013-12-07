@@ -22,6 +22,16 @@ exports = Class(View, function (supr) {
 		this.buildView();
 	};
 
+	this.submitDonation = function (email, amount) {
+		GLOBAL.gameData.donationCollection.add(new Donation({
+			amount: amount,
+			time: new Date(),
+			student: GLOBAL.gameData.student.get('id'),
+			donor: email
+		}));
+		GLOBAL.gameData.donationCollection.save();
+	};
+
 	this.buildView = function() {
 
 		/*this.background = new ImageView({
@@ -69,7 +79,7 @@ exports = Class(View, function (supr) {
 		    on: {
 		      up: bind(this, function () {
 		      		this.emit('Back');
-				})		      
+				})
 		    },
 		    title: "Back",
 		    text: {
