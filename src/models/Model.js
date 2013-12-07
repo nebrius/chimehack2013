@@ -25,7 +25,7 @@ THE SOFTWARE.
 /*global Class, Emitter, XMLHttpRequest, merge*/
 import event.Emitter as Emitter;
 
-var ENDPOINT_PREFIX = 'http://localhost:8080/api/';
+var ENDPOINT_PREFIX = 'http://192.241.239.220:8080/api/';
 
 exports = Class(Emitter, function (supr) {
 	this.init = function (endpoint, values, defaults) {
@@ -33,6 +33,8 @@ exports = Class(Emitter, function (supr) {
 		this._modelAttributes = {};
 		this._modelValues = {};
 		this._endpoint = ENDPOINT_PREFIX + endpoint;
+		this._keys = Object.keys(defaults);
+		this._defaults = defaults;
 		values = merge(values || {}, defaults || {});
 		for (var attribute in values) {
 			this.set(attribute, values[attribute]);
@@ -46,6 +48,9 @@ exports = Class(Emitter, function (supr) {
 	 *	- attribute <string>	The name of the attribute to get
 	 */
 	this.get = function (attribute) {
+		if (this._keys.indexOf(attribute) == -1) {
+			throw new Error('Invalid attribute "' + attribute + '"');
+		}
 		return this._modelAttributes[attribute];
 	};
 
@@ -57,6 +62,12 @@ exports = Class(Emitter, function (supr) {
 	 *	- value <any>			The value to set the attribute to
 	 */
 	this.set = function (attribute, value) {
+		if (this._keys.indexOf(attribute) == -1) {
+			throw new Error('Invalid attribute "' + attribute + '"');
+		}
+		if (typeof value != typeof this._defaults[attribute]) {
+			throw new Error('Invalid value type "' + (typeof value) + '"" for attribute "' + attribute + '"');
+		}
 		if (!this._modelAttributes.hasOwnProperty(attribute)) {
 			Object.defineProperty(this._modelAttributes, attribute, {
 				get: function () {
@@ -66,6 +77,7 @@ exports = Class(Emitter, function (supr) {
 					if (this._modelValues[attribute] !== value) {
 						var previous = this._modelValues[attribute];
 						this._modelValues[attribute] = value;
+						this._hasLocalChanges = true;
 						this.emit('change', {
 							attribute: attribute,
 							value: value,
@@ -85,7 +97,7 @@ exports = Class(Emitter, function (supr) {
 	 * attributeNames() -> Array<string>
 	 */
 	this.attributeNames = function () {
-		return Object.keys(this._modelAttributes);
+		return this._keys;
 	};
 
 	/**
@@ -99,7 +111,7 @@ exports = Class(Emitter, function (supr) {
 		var xhr = new XMLHttpRequest(),
 			id = this.get('id'),
 			err;
-		if (typeof id == 'undefined') {
+		if (typeof id == 'undefined' || id == -1) {
 			throw new Error('Attempted to fetch a model without an id');
 		}
 		xhr.onerror = function(e) {
@@ -136,6 +148,10 @@ exports = Class(Emitter, function (supr) {
 	 *	- callback <Function(error)> The callback to call. Error is a string if an error occured, undefined otherwise
 	 */
 	this.save = function (callback) {
+		if (!this._hasLocalChanges) {
+			callback && callback();
+		}
+		this._hasLocalChanges = false;
 		var xhr = new XMLHttpRequest(),
 			id = this.get('id'),
 			err;
