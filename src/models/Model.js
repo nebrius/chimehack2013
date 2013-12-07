@@ -25,7 +25,8 @@ THE SOFTWARE.
 /*global Class, Emitter, XMLHttpRequest, merge*/
 import event.Emitter as Emitter;
 
-var ENDPOINT_PREFIX = 'http://192.241.239.220:8080/api/';
+var LOCAL = true,
+	ENDPOINT_PREFIX = 'http://' + (LOCAL ? 'localhost' : '192.241.239.220') + ':8080/api/';
 
 exports = Class(Emitter, function (supr) {
 	this.init = function (endpoint, values, defaults) {
@@ -133,10 +134,11 @@ exports = Class(Emitter, function (supr) {
 				for (var attribute in response) {
 					this.set(attribute, response[attribute]);
 				}
+				this._hasLocalChanges = false;
 				callback && callback();
 			}
 		}.bind(this);
-		xhr.open('get', this._endpoint + '/' + id);
+		xhr.open('get', this._endpoint + '/' + id, true);
 		xhr.send();
 	};
 
@@ -175,7 +177,7 @@ exports = Class(Emitter, function (supr) {
 			}
 			callback && callback();
 		}.bind(this);
-		xhr.open('put', this._endpoint + (typeof id == 'undefined' ? '' : '/' + id));
+		xhr.open('put', this._endpoint + (typeof id == 'undefined' ? '' : '/' + id), true);
 		xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
 		var content = JSON.stringify(this._modelValues);
 		xhr.send(content);
