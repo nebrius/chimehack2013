@@ -88,7 +88,8 @@ exports = Class(View, function (supr) {
 			//horizontalAlign: "center",
 			color: "#ffffff",
 			hintColor: "#ffffff",
-			hint: "Enter Username"
+			hint: "Enter Username",
+			text: "amy"
 		});
 
 		this.accessCodeEditView = new TextEditView({

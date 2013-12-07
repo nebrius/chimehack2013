@@ -5,6 +5,7 @@ import src.constants.gameConstants as gameConstants;
 import src.views.DonateView as DonateView;
 import src.views.ErrorView as ErrorView;
 import src.views.HomeView as HomeView;
+import src.views.ProfileView as ProfileView;
 import src.views.LeaderboardView as LeaderboardView;
 import src.views.TitleView as TitleView;
 import src.views.Instruction1View as Instruction1View;
@@ -47,6 +48,7 @@ exports = Class(GC.Application, function () {
 
 		var instruction1View = new Instruction1View();
 		var instruction2View = new Instruction2View();
+		var profileView = new ProfileView();
 		var homeView = new HomeView();
 		var titleView = new TitleView();
 
@@ -68,6 +70,10 @@ exports = Class(GC.Application, function () {
 		var leaderboardView = new LeaderboardView();
 		var donateView = new DonateView();
 
+		homeView.on('Profile', function () {
+			rootView.push(profileView);
+		});
+
 		homeView.on('Donate', function () {
 			rootView.push(donateView);
 		});
@@ -75,6 +81,10 @@ exports = Class(GC.Application, function () {
 		homeView.on('LoadLeaderboard', function () {
 			rootView.push(leaderboardView);
 		});
+
+		profileView.on('Back', function () {
+			rootView.pop();
+		})
 
 		donateView.on('Back', function () {
 			rootView.pop();
