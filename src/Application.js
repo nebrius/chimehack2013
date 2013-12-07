@@ -1,4 +1,4 @@
-import device as Device;
+import device;
 //import AudioManager;
 //import src.sounds.soundManager as soundManager;
 import src.constants.gameConstants as gameConstants;
@@ -51,6 +51,8 @@ exports = Class(GC.Application, function () {
 		  }
 		});*/
 
+		this.scaleUI();
+
 		var rootView = new StackView({
 			superview: this,
 			x: 0,
@@ -100,6 +102,19 @@ exports = Class(GC.Application, function () {
 		titleView.checkForLoggedInUser();
 	};
 	
+	this.scaleUI = function () {
+		if (device.height > device.width) {
+			this.baseWidth = BOUNDS_WIDTH;
+			this.baseHeight = device.height * (BOUNDS_WIDTH / device.width);
+			this.scale = device.width / this.baseWidth;
+		} else {
+			this.baseWidth = BOUNDS_HEIGHT;
+			this.baseHeight = device.height * (BOUNDS_HEIGHT / device.width);
+			this.scale = device.height / this.baseHeight;
+		}
+		this.view.style.scale = this.scale;
+	};
+
 	this.launchUI = function () {
 
 	};

@@ -42,11 +42,11 @@ exports = Class(View, function (supr) {
 			y: 0,
 			width: gameConstants.GAME_WIDTH,
 			height: gameConstants.GAME_HEIGHT,
-			image: "resources/images/backgrounds/title.png",
+			image: "resources/images/backgrounds/login_bg.jpg",
 			opacity: 1
 		});
 
-		this.TitleText = new TextView({
+		/*this.TitleText = new TextView({
 			parent: this,
 			x: gameConstants.GAME_WIDTH / 2 - 220,
 			y: 50,
@@ -56,50 +56,45 @@ exports = Class(View, function (supr) {
 			fontFamily: gameConstants.MAIN_FONT,
 			size: 140,
 			canHandleEvents: false
-		});
+		});*/
 
 		this._textEditView = new TextEditView({
 	      	superview: this,
-		  	x: gameConstants.GAME_WIDTH / 2 - 220,
-			y: 200,
-	      	backgroundColor: "#404040",
-	      	width: 400,
+		  	x: 160,
+			y: 380,
+	      	//backgroundColor: "#ffffff",
+	      	width: 456,
 	      	height: 80,
-	      	color: "#FFFFFF",
-	      	hintColor: "orange",
-	      	hint: "Enter access code"
+			fontWeight: "bold",
+	      	//horizontalAlign: "center",
+	      	color: "#ffffff",
+	      	hintColor: "#ffffff",
+	      	hint: "Enter Access Code"
 	    });
 
 	    this._textEditView = new TextEditView({
 	      	superview: this,
-		  	x: gameConstants.GAME_WIDTH / 2 - 220,
-			y: 350,
-	      	backgroundColor: "#404040",
-	      	width: 400,
+		  	x: 160,
+			y: 500,
+	      	//backgroundColor: "#ffffff",
+	      	width: 456,
 	      	height: 80,
-	      	color: "#FFFFFF",
-	      	hintColor: "orange",
-	      	hint: "Enter password"
+	      	fontWeight: "bold",
+	      	//horizontalAlign: "center",
+	      	color: "#ef7c21",
+	      	hintColor: "#ef7c21",
+	      	hint: "Enter Password"
 	    });
 
     	this.loginButton = new ButtonView({
 		    superview: this,
-		    width: 350,
-		    height: 80,
-		    x: gameConstants.GAME_WIDTH / 2 - 170,
-		    y: 470,
+		    width: 190,
+		    height: 125,
+		    x: gameConstants.GAME_WIDTH / 2 - 100,
+		    y: 670,
 		    images: {
-		      up: "resources/images/buttons/brown_button_up.png",
-		      down: "resources/images/buttons/brown_button_down.png"
-		    },
-		    scaleMethod: "9slice",
-		    sourceSlices: {
-		      horizontal: {left: 80, center: 116, right: 80},
-		      vertical: {top: 10, middle: 80, bottom: 10}
-		    },
-		    destSlices: {
-		      horizontal: {left: 40, right: 40},
-		      vertical: {top: 4, bottom: 4}
+		      up: "resources/images/buttons/login_button.png"
+		      //down: "resources/images/buttons/brown_button_down.png"
 		    },
 		    on: {
 		      up: bind(this, function () {
@@ -108,14 +103,14 @@ exports = Class(View, function (supr) {
 
 				    this.emit('Start');
 				})		      
-		    },
-		    title: "Login",
+		    }
+		    /*title: "Login",
 		    text: {
 		      color: "#ffffff",
 		      size: 36,
 		      autoFontSize: false,
 		      autoSize: false
-		    }
+		    }*/
     	});
 
     	this.errorDialog = new ErrorView({
