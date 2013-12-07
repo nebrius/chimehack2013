@@ -33,6 +33,7 @@ exports = Class(Model, function (supr) {
 			grade: 0,
 			classname: '',
 			email: '',
+			level: 0
 		}]);
 	};
 });
