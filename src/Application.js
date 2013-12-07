@@ -11,14 +11,13 @@ import src.views.Instruction1View as Instruction1View;
 import src.views.Instruction2View as Instruction2View;
 import ui.View as View;
 import ui.StackView as StackView;
-import src.lib.parse as Parse;
 import util.ajax as ajax;
 
 var BOUNDS_WIDTH = 576;
 var BOUNDS_HEIGHT = 1024;
 
 exports = Class(GC.Application, function () {
-	
+
 	this.initUI = function() {
 		this.engine.updateOpts({
 			alwaysRepaint: true,
@@ -31,28 +30,6 @@ exports = Class(GC.Application, function () {
 			preload: ['resources/images', 'resources/sounds']
 		});
 
-		//this.scaleUI();
-		//logger.log(Parse.Parse.VERSION);
-		Parse.Parse.initialize("J3gALSUBlUMfOSAGHyaEqXGVmyrlXOOsa8TiCh7u", "0gqBOcrMEu08EdlaHaszYexc9o4LXuua4UeY2jYC");
-
-		/*ajax.post({
-		  'url':'https://api.parse.com/1/events/AppOpened',
-		  'headers':{
-		    'X-Parse-Application-Id':'J3gALSUBlUMfOSAGHyaEqXGVmyrlXOOsa8TiCh7u',
-		    'X-Parse-REST-API-Key':'0gqBOcrMEu08EdlaHaszYexc9o4LXuua4UeY2jYC',
-		    'Content-Type':'application/json'
-		  },
-		  data:{
-
-		  },
-		  success:function(result) { 
-		    // app open was saved.
-		  },
-		  error:function(error) { 
-		    // error saving analytics.  message in error.responseText
-		  }
-		});*/
-
 		this.scaleUI();
 
 		var rootView = new StackView({
@@ -64,7 +41,7 @@ exports = Class(GC.Application, function () {
 			clip: true,
 			backgroundColor: '#000000'
 		});
-		
+
 		var instruction1View = new Instruction1View();
 		var instruction2View = new Instruction2View();
 		var homeView = new HomeView();
@@ -109,10 +86,8 @@ exports = Class(GC.Application, function () {
 		});
 
 		this.initAudio();
-
-		titleView.checkForLoggedInUser();
 	};
-	
+
 	this.scaleUI = function () {
 		if (device.height > device.width) {
 			this.baseWidth = BOUNDS_WIDTH;
@@ -129,7 +104,7 @@ exports = Class(GC.Application, function () {
 	this.launchUI = function () {
 
 	};
-	
+
 	this.initAudio = function () {
 
 		//soundManager.playGameBackground();

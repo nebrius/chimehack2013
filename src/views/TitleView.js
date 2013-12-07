@@ -4,11 +4,29 @@ import src.constants.gameConstants as gameConstants;
 import ui.TextView as TextView;
 import ui.widget.ButtonView as ButtonView;
 import ui.TextEditView as TextEditView;
-import src.lib.parseUtil as ParseUtil;
 import device;
 import src.views.ErrorView as ErrorView;
+import src.collections.Students as StudentsCollection;
 
 exports = Class(View, function (supr) {
+
+	var loginSemaphore = 2;
+	function login(err) {
+		loginSemaphore--;
+		if (err) {
+			alert('Error connecting to server');
+		} else if (!loginSemaphore) {
+			var username = this.usernameEditView.getText(),
+				student = this._studentCollection.modelWithId(username);
+			if (!student) {
+				// TODO: invalid username, show error
+				alert('Unknown student ' + username)
+			} else {
+				GLOBAL.student = student;
+				this.emit('start');
+			}
+		}
+	}
 
 	this.init = function(opts) {
 
@@ -23,16 +41,8 @@ exports = Class(View, function (supr) {
 
 		this.buildView();
 
-		this.parseUtil = new ParseUtil();
-		//this.currentUser = this.parseUtil.currentUser();
+		(this._studentCollection = new StudentsCollection()).fetch(login.bind(this));
 	};
-
-	this.checkForLoggedInUser = function() {
-
-		//if (this.currentUser) {
-		//    this.emit('Start');
-		//} 
-	}
 
 	this.buildView = function() {
 
@@ -58,63 +68,60 @@ exports = Class(View, function (supr) {
 			canHandleEvents: false
 		});*/
 
-		this.accessCodeEditView = new TextEditView({
-	      	superview: this,
-		  	x: 160,
+		this.usernameEditView = new TextEditView({
+			superview: this,
+			x: 160,
 			y: 380,
-	      	//backgroundColor: "#ffffff",
-	      	width: 456,
-	      	height: 80,
+			//backgroundColor: "#ffffff",
+			width: 456,
+			height: 80,
 			fontWeight: "bold",
-	      	//horizontalAlign: "center",
-	      	color: "#ffffff",
-	      	hintColor: "#ffffff",
-	      	hint: "Enter Access Code"
-	    });
+			//horizontalAlign: "center",
+			color: "#ffffff",
+			hintColor: "#ffffff",
+			hint: "Enter Username"
+		});
 
-	    this.passwordEditView = new TextEditView({
-	      	superview: this,
-		  	x: 160,
+		this.accessCodeEditView = new TextEditView({
+			superview: this,
+			x: 160,
 			y: 500,
-	      	//backgroundColor: "#ffffff",
-	      	width: 456,
-	      	height: 80,
-	      	fontWeight: "bold",
-	      	//horizontalAlign: "center",
-	      	color: "#ef7c21",
-	      	hintColor: "#ef7c21",
-	      	hint: "Enter Password"
-	    });
+			//backgroundColor: "#ffffff",
+			width: 456,
+			height: 80,
+			fontWeight: "bold",
+			//horizontalAlign: "center",
+			color: "#ef7c21",
+			hintColor: "#ef7c21",
+			hint: "Enter Access Code"
+		});
 
-    	this.loginButton = new ButtonView({
-		    superview: this,
-		    width: 190,
-		    height: 125,
-		    x: gameConstants.GAME_WIDTH / 2 - 100,
-		    y: 670,
-		    images: {
-		      up: "resources/images/buttons/login_button.png"
-		      //down: "resources/images/buttons/brown_button_down.png"
-		    },
-		    on: {
-		      up: bind(this, function () {
+		this.loginButton = new ButtonView({
+			superview: this,
+			width: 190,
+			height: 125,
+			x: gameConstants.GAME_WIDTH / 2 - 100,
+			y: 670,
+			images: {
+				up: "resources/images/buttons/login_button.png"
+				//down: "resources/images/buttons/brown_button_down.png"
+			},
+			on: {
+				up: bind(this, function () {
+					login.call(this);
+				})
+			}
+			/*title: "Login",
+			text: {
+			  color: "#ffffff",
+			  size: 36,
+			  autoFontSize: false,
+			  autoSize: false
+			}*/
+		});
 
-		      		//this.parseUtil.signUp(this.accessCodeEditView,this.passwordEditView);
-
-				    this.emit('Start');
-				})		      
-		    }
-		    /*title: "Login",
-		    text: {
-		      color: "#ffffff",
-		      size: 36,
-		      autoFontSize: false,
-		      autoSize: false
-		    }*/
-    	});
-
-    	this.errorDialog = new ErrorView({
-    		parent: this
+		this.errorDialog = new ErrorView({
+			parent: this
 		});
 		this.addSubview(this.errorDialog);
 

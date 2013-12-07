@@ -111,8 +111,11 @@ exports = Class(Emitter, function (supr) {
 						newModel.fetch(fetchResponse);
 					}
 				}
+				if (err) {
+					semaphoreCount = 0;
+				}
 				if (!semaphoreCount) {
-					callback && callback();
+					callback && callback(err);
 				}
 			}
 		}.bind(this);
@@ -125,8 +128,11 @@ exports = Class(Emitter, function (supr) {
 
 		function saveResponse(err) {
 			semaphoreCount--;
+			if (err) {
+				semaphoreCount = 0;
+			}
 			if (!semaphoreCount) {
-				callback && callback();
+				callback && callback(err);
 			}
 		}
 

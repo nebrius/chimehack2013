@@ -29,7 +29,7 @@ exports = Class(Model, function (supr) {
 	this.init = function (values) {
 		supr(this, 'init', [ 'student', values, {
 			id: '',
-			password: '',
+			accessCode: '',
 			name: '',
 			school: '',
 			grade: 0,
