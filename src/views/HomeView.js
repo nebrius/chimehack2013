@@ -171,6 +171,16 @@ exports = Class(View, function (supr) {
 				})
 		    }
     	});
+    	
+    	this.AvatarImage = new ImageView({
+    		parent: this,
+			x: 30,
+			y: 100,
+			width: 100,
+			height: 100,
+			image: "resources/images/backgrounds/avatar.png",
+			opacity: 1
+    	})
 
 		this.DonationsButton = new ButtonView({
 		    superview: this,

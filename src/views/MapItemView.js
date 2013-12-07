@@ -55,10 +55,10 @@ exports = Class(DialogBackgroundView, function (supr) {
 
 		this.background = new ImageView({
 			parent: this._dialogView,
-			x: 0,
-			y: 0,
-			width: gameConstants.GAME_WIDTH - 130,
-			height: 600,
+			x: 10,
+			y: 30,
+			width: 450,
+			height: 400,
 			image: "resources/images/backgrounds/market_info.png",
 			opacity: 1
 		});
