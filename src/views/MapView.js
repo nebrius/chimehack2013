@@ -68,7 +68,7 @@ exports = Class(ScrollView, function (supr) {
 
 		this.buildView();
 
-		this.scrollTo(200,200,550);
+		this.scrollTo(160,140,550);
 	};
 
 	this.load = function() {
@@ -83,80 +83,46 @@ exports = Class(ScrollView, function (supr) {
 			y: 0,
 			width: 900,
 			height: 900,
-			image: "resources/images/backgrounds/map_1400.png",
+			image: "resources/images/backgrounds/map_wo_button.png",
 			opacity: 1
 		});
 
-		this.HomeButton = new ButtonView({
+		this.marketButton = new ButtonView({
 		    superview: this,
-		    width: 80,
-		    height: 76,
-		    x: 420,
-		    y: 100,
+		    width: 165,
+		    height: 120,
+		    x: 475,
+		    y: 305,
 		    images: {
-		      up: "resources/images/buttons/home.png"
+		      up: "resources/images/locations/market.png"
 		      //down: "resources/images/buttons/brown_button_down.png"
 		    },
 		    on: {
 		      up: bind(this, function () {
+		      		this.parent.mapItemView.setMapItemType('market');
 		      		this.parent.mapItemView.show();
 
 				})		      
 		    }
     	});
 
-    	this.ProfileButton = new ButtonView({
+    	this.hospitalButton = new ButtonView({
 		    superview: this,
-		    width: 80,
-		    height: 80,
-		    x: 230,
-		    y: 200,
+		    width: 135,
+		    height: 100,
+		    x: 530,
+		    y: 423,
 		    images: {
-		      up: "resources/images/buttons/profile.png"
+		      up: "resources/images/locations/hospital.png"
 		      //down: "resources/images/buttons/brown_button_down.png"
 		    },
 		    on: {
 		      up: bind(this, function () {
-		      		this.emit('Donate');
+		      		this.parent.mapItemView.setMapItemType('hospital');
+		      		this.parent.mapItemView.show();
 				})		      
 		    }
     	});
-
-    	this.DonationsButton = new ButtonView({
-		    superview: this,
-		    width: 80,
-		    height: 80,
-		    x: 340,
-		    y: 250,
-		    images: {
-		      up: "resources/images/buttons/donation.png"
-		      //down: "resources/images/buttons/brown_button_down.png"
-		    },
-		    on: {
-		      up: bind(this, function () {
-		      		this.emit('Donate');
-				})		      
-		    }
-    	});
-
-    	this.LeaderboardButton = new ButtonView({
-		    superview: this,
-		    width: 80,
-		    height: 80,
-		    x: 250,
-		    y: 400,
-		    images: {
-		      up: "resources/images/buttons/leaderboard.png"
-		      //down: "resources/images/buttons/brown_button_down.png"
-		    },
-		    on: {
-		      up: bind(this, function () {
-		      		this.emit('LoadLeaderboard');
-				})		      
-		    }
-    	});
-
-
 	};
 
     /*this.onInputStart = function (evt, pt) {

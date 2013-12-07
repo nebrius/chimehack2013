@@ -209,7 +209,7 @@ exports = Class(View, function (supr) {
 			x: gameConstants.GAME_WIDTH / 2 - 100,
 			y: 670,
 			images: {
-				up: "resources/images/buttons/login_button.png"
+				up: "resources/images/buttons/donate_button.png"
 				//down: "resources/images/buttons/brown_button_down.png"
 			},
 			on: {

@@ -7,12 +7,15 @@ import menus.views.components.BoxDialogView as BoxDialogView;
 import menus.views.components.DialogBackgroundView as DialogBackgroundView;
 import src.constants.gameConstants as gameConstants;
 import ui.widget.ButtonView as ButtonView;
+import ui.resource.Image as Image;
 //import src.lib.parseUtil as ParseUtil;
 
 exports = Class(DialogBackgroundView, function (supr) {
 	this.init = function (opts) {
 
 		this.parent = opts.parent;
+
+		this.mapItemType = '';
 
 		supr(this, 'init', arguments);
 
@@ -42,6 +45,12 @@ exports = Class(DialogBackgroundView, function (supr) {
 		this.designView();
 	};
 
+	this.setMapItemType = function(type) {
+		
+		this.locatation_img = new Image({url: "resources/images/backgrounds/" + type + "_info.png"});
+		this.background.setImage(this.locatation_img);
+	}
+
 	this.designView = function() {
 
 		this.background = new ImageView({
@@ -56,9 +65,9 @@ exports = Class(DialogBackgroundView, function (supr) {
 
 		this.closeButton = new ButtonView({
 		    superview: this._dialogView,
-		    width: 80,
-		    height: 80,
-		    x: 385,
+		    width: 70,
+		    height: 70,
+		    x: 395,
 		    y: 5,
 		    images: {
 		      up: "resources/images/buttons/close_button.png"
@@ -78,7 +87,7 @@ exports = Class(DialogBackgroundView, function (supr) {
 		    x: 0,
 		    y: 455,
 		    images: {
-		      up: "resources/images/buttons/donate_button.png"
+		      up: "resources/images/buttons/makeachange_button.png"
 		      //down: "resources/images/buttons/brown_button_down.png"
 		    },
 		    on: {

@@ -85,6 +85,7 @@ exports = Class(View, function (supr) {
 			width: 456,
 			height: 80,
 			fontWeight: "bold",
+			text:"amy",
 			//horizontalAlign: "center",
 			color: "#ffffff",
 			hintColor: "#ffffff",
@@ -119,6 +120,7 @@ exports = Class(View, function (supr) {
 			on: {
 				up: bind(this, function () {
 					login.call(this);
+					//this.emit('Start');
 				})
 			}
 			/*title: "Login",
