@@ -178,35 +178,18 @@ exports = Class(View, function (supr) {
 
 		this.BackButton = new ButtonView({
 			superview: this,
-			width: 130,
-			height: 70,
-			x: 10,
+			width: 80,
+			height: 80,
+			x: 480,
 			y: 10,
 			images: {
-				up: "resources/images/buttons/brown_button_up.png",
-				down: "resources/images/buttons/brown_button_down.png"
-			},
-			scaleMethod: "9slice",
-			sourceSlices: {
-				horizontal: {left: 80, center: 116, right: 80},
-				vertical: {top: 10, middle: 80, bottom: 10}
-			},
-			destSlices: {
-				horizontal: {left: 40, right: 40},
-				vertical: {top: 4, bottom: 4}
+				up: "resources/images/buttons/close_button.png"
+				//down: "resources/images/buttons/brown_button_down.png"
 			},
 			on: {
 				up: bind(this, function () {
-						this.emit('Back');
+					this.emit('Back');
 				})
-			},
-			title: "Back",
-			text: {
-				color: "#ffffff",
-				size: 36,
-				fontFamily: gameConstants.MAIN_FONT,
-				autoFontSize: false,
-				autoSize: false
 			}
 		});
 
