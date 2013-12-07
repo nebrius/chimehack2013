@@ -26,7 +26,7 @@ THE SOFTWARE.
 import event.Emitter as Emitter;
 import ..models.Model as Model;
 
-var LOCAL = true,
+var LOCAL = false,
 	ENDPOINT_PREFIX = 'http://' + (LOCAL ? 'localhost' : '192.241.239.220') + ':8080/api/';
 
 exports = Class(Emitter, function (supr) {
@@ -99,19 +99,18 @@ exports = Class(Emitter, function (supr) {
 					var found;
 					for (var i = 0, len = this._models.length; i < len; i++) {
 						if (this._models[i].get('id') == id) {
-							this._models[i].fetch(fetchResponse);
 							semaphoreCount++;
+							this._models[i].fetch(fetchResponse);
 							found = true;
 						}
 					}
 					if (!found) {
 						var newModel = new this._constructor({ id: id });
 						this._models.push(newModel);
-						newModel.fetch(fetchResponse);
 						semaphoreCount++;
+						newModel.fetch(fetchResponse);
 					}
 				}
-				console.log(response);
 				if (!semaphoreCount) {
 					callback && callback();
 				}
@@ -121,9 +120,32 @@ exports = Class(Emitter, function (supr) {
 		xhr.send();
 	};
 
-	this.save = function (callback) {};
+	this.save = function (callback) {
+		var semaphoreCount = this._models.length;
+
+		function saveResponse(err) {
+			semaphoreCount--;
+			if (!semaphoreCount) {
+				callback && callback();
+			}
+		}
+
+		this._models.forEach(function (model) {
+			model.save(saveResponse);
+		});
+	};
 
 	this.filter = function (filter) {};
 
-	this.values = function () {};
+	this.values = function () {
+		return this._models;
+	};
+
+	this.modelWithId = function (id) {
+		for (var i = 0, len = this._models.length; i < len; i++) {
+			if (this._models[i].get('id') == id) {
+				return this._models[i];
+			}
+		}
+	};
 });

@@ -25,7 +25,7 @@ THE SOFTWARE.
 /*global Class, Emitter, XMLHttpRequest, merge*/
 import event.Emitter as Emitter;
 
-var LOCAL = true,
+var LOCAL = false,
 	ENDPOINT_PREFIX = 'http://' + (LOCAL ? 'localhost' : '192.241.239.220') + ':8080/api/';
 
 exports = Class(Emitter, function (supr) {
@@ -152,6 +152,7 @@ exports = Class(Emitter, function (supr) {
 	this.save = function (callback) {
 		if (!this._hasLocalChanges) {
 			callback && callback();
+			return;
 		}
 		this._hasLocalChanges = false;
 		var xhr = new XMLHttpRequest(),
@@ -160,26 +161,27 @@ exports = Class(Emitter, function (supr) {
 		xhr.onerror = function(e) {
 			err = e.target.status;
 		};
-		xhr.onload = function () {
-			if (xhr.status != 200) {
-				callback && callback(err || 'HTTP request failed with code ' + xhr.status);
-				return;
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState == 4) {
+				if (xhr.status != 200) {
+					callback && callback(err || 'HTTP request failed with code ' + xhr.status);
+					return;
+				}
+				var response;
+				try {
+					response = JSON.parse(xhr.responseText);
+				} catch(e) {
+					callback && callback(e.toString());
+					return;
+				}
+				for (var attribute in response) {
+					this.set(attribute, response[attribute]);
+				}
+				callback && callback();
 			}
-			var response;
-			try {
-				response = JSON.parse(xhr.responseText);
-			} catch(e) {
-				callback && callback(e.toString());
-				return;
-			}
-			for (var attribute in response) {
-				this.set(attribute, response[attribute]);
-			}
-			callback && callback();
 		}.bind(this);
 		xhr.open('put', this._endpoint + (typeof id == 'undefined' ? '' : '/' + id), true);
 		xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-		var content = JSON.stringify(this._modelValues);
-		xhr.send(content);
+		xhr.send(JSON.stringify(this._modelValues));
 	};
 });
