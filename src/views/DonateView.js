@@ -4,6 +4,7 @@ import src.constants.gameConstants as gameConstants;
 import ui.TextView as TextView;
 import ui.widget.ButtonView as ButtonView;
 import src.lib.parseUtil as ParseUtil;
+import ui.TextEditView as TextEditView;
 
 exports = Class(View, function (supr) {
 
@@ -24,15 +25,15 @@ exports = Class(View, function (supr) {
 
 	this.buildView = function() {
 
-		/*this.background = new ImageView({
+		this.background = new ImageView({
 			parent: this,
 			x: 0,
 			y: 0,
 			width: gameConstants.GAME_WIDTH,
-			height: gameConstants.GAME_HEIGHT,
-			image: "resources/images/backgrounds/home.png",
+			height: 960,
+			image: "resources/images/backgrounds/donation_bg.png",
 			opacity: 1
-		});*/
+		});
 
 		/*this.TitleText = new TextView({
 			parent: this,
@@ -63,6 +64,34 @@ exports = Class(View, function (supr) {
 				})		      
 		    }
     	});
+
+		this.customAmountEditView = new TextEditView({
+			superview: this,
+			x: 160,
+			y: 380,
+			//backgroundColor: "#ffffff",
+			width: 456,
+			height: 80,
+			fontWeight: "bold",
+			//horizontalAlign: "center",
+			color: "#ffffff",
+			hintColor: "#ffffff",
+			hint: "Enter Custom Amount"
+		});
+
+		this.emailEditView = new TextEditView({
+			superview: this,
+			x: 160,
+			y: 500,
+			//backgroundColor: "#ffffff",
+			width: 456,
+			height: 80,
+			fontWeight: "bold",
+			//horizontalAlign: "center",
+			color: "#ef7c21",
+			hintColor: "#ef7c21",
+			hint: "Enter Email"
+		});
 
     	this.donateButton = new ButtonView({
 			superview: this,
