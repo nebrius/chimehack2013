@@ -64,7 +64,7 @@ exports = Class(View, function (supr) {
 		}.bind(this));
 
  		this.mapItemView = new MapItemView({
-
+ 			parent: this
 		});
 		this.addSubview(this.mapItemView);
 
