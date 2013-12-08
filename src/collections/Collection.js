@@ -26,8 +26,7 @@ THE SOFTWARE.
 import event.Emitter as Emitter;
 import ..models.Model as Model;
 
-var LOCAL = false,
-	ENDPOINT_PREFIX = 'http://' + (LOCAL ? 'localhost' : '192.241.239.220') + ':8080/api/',
+var ENDPOINT_PREFIX = 'http://localhost:8080/api/',
 	SYNC_INTERVAL = 5000;
 
 exports = Class(Emitter, function (supr) {
