@@ -79,6 +79,7 @@ exports = Class(View, function (supr) {
 		      		this.selectedFiveDollarView.hide();
 		      		this.selectedTenDollarView.hide();
 		      		this.selectedOneDollarView.show();
+					this._selectedAmount = 1;
 				})
 		    }
     	});
@@ -95,6 +96,7 @@ exports = Class(View, function (supr) {
 		      		this.selectedFiveDollarView.hide();
 		      		this.selectedTenDollarView.hide();
 		      		this.selectedTwoDollarView.show();
+					this._selectedAmount = 2;
 				})
 		    }
     	});
@@ -111,6 +113,7 @@ exports = Class(View, function (supr) {
 		      		this.selectedTwoDollarView.hide();
 		      		this.selectedTenDollarView.hide();
 		      		this.selectedFiveDollarView.show();
+					this._selectedAmount = 5;
 				})
 		    }
     	});
@@ -127,6 +130,7 @@ exports = Class(View, function (supr) {
 		      		this.selectedTwoDollarView.hide();
 		      		this.selectedFiveDollarView.hide();
 		      		this.selectedTenDollarView.show();
+					this._selectedAmount = 10;
 				})
 		    }
     	});
@@ -220,7 +224,7 @@ exports = Class(View, function (supr) {
 						donor = GLOBAL.gameData.donorCollection.modelWithId(email);
 					function saveDonation() {
 						GLOBAL.gameData.donationCollection.add(new Donation({
-							amount: 2,
+							amount: this._selectedAmount,
 							time: (new Date()).toString(),
 							student: GLOBAL.gameData.student.get('id'),
 							donor: email
