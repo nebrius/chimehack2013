@@ -24,7 +24,7 @@ THE SOFTWARE.
 
 /*global Class, Collection, Donation*/
 import .Collection as Collection;
-import ..models.Donor as Donation
+import ..models.Donation as Donation
 
 exports = Class(Collection, function (supr) {
 	this.init = function (values) {

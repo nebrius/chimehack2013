@@ -36,30 +36,6 @@ exports = Class(View, function (supr) {
 					return sum + model.get('amount');
 				}, 0).toFixed(2));
 			}.bind(this));
-			GLOBAL.gameData.donationCollection.add(new Donation({
-				amount: 10,
-				time: new Date(),
-				student: 'leela',
-				donor: ''
-			}));
-			GLOBAL.gameData.donationCollection.add(new Donation({
-				amount: 1,
-				time: new Date(),
-				student: 'fry',
-				donor: ''
-			}));
-			GLOBAL.gameData.donationCollection.add(new Donation({
-				amount: 50,
-				time: new Date(),
-				student: 'bender',
-				donor: ''
-			}));
-			GLOBAL.gameData.donationCollection.add(new Donation({
-				amount: 100,
-				time: new Date(),
-				student: 'amy',
-				donor: ''
-			}));
 			createTable();
 		}.bind(this));
 

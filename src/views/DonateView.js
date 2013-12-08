@@ -5,6 +5,8 @@ import ui.TextView as TextView;
 import ui.widget.ButtonView as ButtonView;
 import src.lib.parseUtil as ParseUtil;
 import ui.TextEditView as TextEditView;
+import src.models.Donor as Donor;
+import src.models.Donation as Donation;
 
 exports = Class(View, function (supr) {
 
@@ -61,7 +63,7 @@ exports = Class(View, function (supr) {
 		    on: {
 		      up: bind(this, function () {
 		      		this.emit('Back');
-				})		      
+				})
 		    }
     	});
 
@@ -105,7 +107,30 @@ exports = Class(View, function (supr) {
 			},
 			on: {
 				up: bind(this, function () {
-					this.emit('Back');
+					var email = this.emailEditView.getText(),
+						donor = GLOBAL.gameData.donorCollection.modelWithId(email);
+					function saveDonation() {
+						GLOBAL.gameData.donationCollection.add(new Donation({
+							amount: 7,
+							time: (new Date()).toString(),
+							student: GLOBAL.gameData.student.get('id'),
+							donor: email
+						}));
+						GLOBAL.gameData.donationCollection.save(function () {
+							this.emit('Back');
+						}.bind(this));
+					}
+					if (!donor) {
+						GLOBAL.gameData.donorCollection.add(donor = new Donor({
+							id: email,
+							name: email.substring(0, email.indexOf('@'))
+						}));
+						GLOBAL.gameData.donorCollection.save(function () {
+							saveDonation.call(this);
+						}.bind(this));
+					} else {
+						saveDonation.call(this);
+					}
 				})
 			}
 		});

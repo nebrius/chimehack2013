@@ -28,9 +28,9 @@ import .Model as Model;
 exports = Class(Model, function (supr) {
 	this.init = function (values) {
 		supr(this, 'init', [ 'donation', values, {
-			id: -1,
+			id: '-1',
 			amount: 0,
-			time: new Date(),
+			time: '',
 			student: '',
 			donor: ''
 		}]);

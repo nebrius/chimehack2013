@@ -57,7 +57,7 @@ exports = Class(Emitter, function (supr) {
 
 	/**
 	 * Sets the value of an attribute
-	 * 
+	 *
 	 * set(attribute value) -> undefined
 	 *	- attribute <string>	The name of the attribute to set
 	 *	- value <any>			The value to set the attribute to
@@ -112,7 +112,7 @@ exports = Class(Emitter, function (supr) {
 		var xhr = new XMLHttpRequest(),
 			id = this.get('id'),
 			err;
-		if (typeof id == 'undefined' || id == -1) {
+		if (typeof id == 'undefined' || id == '-1') {
 			throw new Error('Attempted to fetch a model without an id');
 		}
 		xhr.onerror = function(e) {
@@ -180,7 +180,7 @@ exports = Class(Emitter, function (supr) {
 				callback && callback();
 			}
 		}.bind(this);
-		xhr.open('put', this._endpoint + (typeof id == 'undefined' ? '' : '/' + id), true);
+		xhr.open('put', this._endpoint + (typeof id == 'undefined' || id == '-1' ? '' : '/' + id), true);
 		xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
 		xhr.send(JSON.stringify(this._modelValues));
 	};

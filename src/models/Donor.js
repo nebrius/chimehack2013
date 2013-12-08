@@ -29,8 +29,7 @@ exports = Class(Model, function (supr) {
 	this.init = function (values) {
 		supr(this, 'init', [ 'donor', values, {
 			id: '',
-			name: '',
-			email: ''
+			name: ''
 		}]);
 	};
 });
