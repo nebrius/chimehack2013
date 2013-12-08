@@ -66,7 +66,7 @@ exports = Class(View, function (supr) {
 				})
 		    }
     	});
-    	
+
     	this.selectOneView = new ButtonView({
     		superview: this,
     		width: 124,
@@ -79,10 +79,10 @@ exports = Class(View, function (supr) {
 		      		this.selectedFiveDollarView.hide();
 		      		this.selectedTenDollarView.hide();
 		      		this.selectedOneDollarView.show();
-				})		      
+				})
 		    }
     	});
-    	
+
     	this.selectTwoView = new ButtonView({
     		superview: this,
     		width: 124,
@@ -95,10 +95,10 @@ exports = Class(View, function (supr) {
 		      		this.selectedFiveDollarView.hide();
 		      		this.selectedTenDollarView.hide();
 		      		this.selectedTwoDollarView.show();
-				})		      
+				})
 		    }
     	});
-    	
+
     	this.selectFiveView = new ButtonView({
     		superview: this,
     		width: 124,
@@ -111,10 +111,10 @@ exports = Class(View, function (supr) {
 		      		this.selectedTwoDollarView.hide();
 		      		this.selectedTenDollarView.hide();
 		      		this.selectedFiveDollarView.show();
-				})		      
+				})
 		    }
     	});
-    	
+
     	this.selectTenView = new ButtonView({
     		superview: this,
     		width: 124,
@@ -127,10 +127,10 @@ exports = Class(View, function (supr) {
 		      		this.selectedTwoDollarView.hide();
 		      		this.selectedFiveDollarView.hide();
 		      		this.selectedTenDollarView.show();
-				})		      
+				})
 		    }
     	});
-    	
+
     	this.selectedOneDollarView = new ImageView({
     		parent: this,
 			x: 35,
@@ -141,7 +141,7 @@ exports = Class(View, function (supr) {
 			image: "resources/images/donation/one_selected.png",
 			opacity: 1
     	});
-    	
+
     	this.selectedTwoDollarView = new ImageView({
     		parent: this,
 			x: 159,
@@ -152,7 +152,7 @@ exports = Class(View, function (supr) {
 			image: "resources/images/donation/two_selected.png",
 			opacity: 1
     	});
-    	
+
     	this.selectedFiveDollarView = new ImageView({
     		parent: this,
 			x: 293,
@@ -220,7 +220,7 @@ exports = Class(View, function (supr) {
 						donor = GLOBAL.gameData.donorCollection.modelWithId(email);
 					function saveDonation() {
 						GLOBAL.gameData.donationCollection.add(new Donation({
-							amount: 7,
+							amount: 2,
 							time: (new Date()).toString(),
 							student: GLOBAL.gameData.student.get('id'),
 							donor: email
