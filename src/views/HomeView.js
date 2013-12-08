@@ -61,6 +61,11 @@ exports = Class(View, function (supr) {
 					return sum + model.get('amount');
 				}, 0).toFixed(2));
 			}.bind(this));
+			this.donationAmountText.setText('$' + GLOBAL.gameData.donationCollection.filter({
+				student: GLOBAL.gameData.student.get('id')
+			}).reduce(function (sum, model) {
+				return sum + model.get('amount');
+			}, 0).toFixed(2));
 		}.bind(this));
 
  		this.mapItemView = new MapItemView({
@@ -171,7 +176,7 @@ exports = Class(View, function (supr) {
 				})
 		    }
     	});
-    	
+
     	this.AvatarImage = new ImageView({
     		parent: this,
 			x: 30,
