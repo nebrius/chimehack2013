@@ -233,7 +233,7 @@ exports = Class(View, function (supr) {
 		    },
 		    on: {
 		      up: bind(this, function () {
-		      		this.emit('LoadLeaderboard');
+		      		this.emit('Social');
 				})
 		    }
     	});
