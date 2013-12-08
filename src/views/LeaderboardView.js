@@ -46,6 +46,7 @@ exports = Class(View, function (supr) {
 				}).reduce(function (sum, model) {
 					return sum + model.get('amount');
 				}, 0).toFixed(2));
+				createTable();
 			}.bind(this));
 			this.donationAmountText.setText('$' + GLOBAL.gameData.donationCollection.filter({
 				student: GLOBAL.gameData.student.get('id')
