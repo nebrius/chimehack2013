@@ -8,6 +8,7 @@ import src.views.HomeView as HomeView;
 import src.views.ProfileView as ProfileView;
 import src.views.LeaderboardView as LeaderboardView;
 import src.views.TitleView as TitleView;
+import src.views.SocialView as SocialView;
 import src.views.Instruction1View as Instruction1View;
 import src.views.Instruction2View as Instruction2View;
 import src.views.Instruction3View as Instruction3View;
@@ -53,6 +54,7 @@ exports = Class(GC.Application, function () {
 		var profileView = new ProfileView();
 		var homeView = new HomeView();
 		var titleView = new TitleView();
+		var socialView = new SocialView();
 
 		titleView.on('Start', function () {
 			rootView.push(instruction1View);
@@ -84,6 +86,10 @@ exports = Class(GC.Application, function () {
 			rootView.push(donateView);
 		});
 
+		homeView.on('Social', function () {
+			rootView.push(socialView);
+		});
+
 		homeView.on('LoadLeaderboard', function () {
 			rootView.push(leaderboardView);
 		});
@@ -93,6 +99,10 @@ exports = Class(GC.Application, function () {
 		})
 
 		donateView.on('Back', function () {
+			rootView.pop();
+		});
+
+		socialView.on('Back', function () {
 			rootView.pop();
 		});
 
