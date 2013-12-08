@@ -25,8 +25,7 @@ THE SOFTWARE.
 /*global Class, Emitter, XMLHttpRequest, merge*/
 import event.Emitter as Emitter;
 
-var LOCAL = false,
-	ENDPOINT_PREFIX = 'http://' + (LOCAL ? 'localhost' : '192.241.239.220') + ':8080/api/';
+var ENDPOINT_PREFIX = 'http://localhost:8080/api/';
 
 exports = Class(Emitter, function (supr) {
 	this.init = function (endpoint, values, defaults) {
