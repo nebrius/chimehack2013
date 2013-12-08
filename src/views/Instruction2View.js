@@ -23,26 +23,14 @@ exports = Class(View, function (supr) {
 
 	this.buildView = function() {
 
-		/*this.background = new ImageView({
+		this.background = new ImageView({
 			parent: this,
 			x: 0,
 			y: 0,
 			width: gameConstants.GAME_WIDTH,
 			height: gameConstants.GAME_HEIGHT,
-			image: "resources/images/backgrounds/login_bg.jpg",
+			image: "resources/images/backgrounds/intro_2.jpg",
 			opacity: 1
-		});*/
-
-		this.InstructionText = new TextView({
-			parent: this,
-			x: gameConstants.GAME_WIDTH / 2 - 220,
-			y: 50,
-			width: 450,
-			height: 150,
-			text: "Why?",
-			fontFamily: gameConstants.MAIN_FONT,
-			size: 140,
-			canHandleEvents: false
 		});
 
     	this.loginButton = new ButtonView({
@@ -50,7 +38,7 @@ exports = Class(View, function (supr) {
 		    width: 190,
 		    height: 125,
 		    x: gameConstants.GAME_WIDTH / 2 - 100,
-		    y: 670,
+		    y: 710,
 		    //images: {
 		      //up: "resources/images/buttons/login_button.png"
 		      //down: "resources/images/buttons/brown_button_down.png"
@@ -60,7 +48,7 @@ exports = Class(View, function (supr) {
 				    this.emit('Continue');
 				})		      
 		    },
-		    title: "Continue",
+		    title: "",
 		    text: {
 		      color: "#ffffff",
 		      size: 36,

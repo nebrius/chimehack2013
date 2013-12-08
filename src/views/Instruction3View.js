@@ -29,16 +29,16 @@ exports = Class(View, function (supr) {
 			y: 0,
 			width: gameConstants.GAME_WIDTH,
 			height: gameConstants.GAME_HEIGHT,
-			image: "resources/images/backgrounds/intro_1.jpg",
+			image: "resources/images/backgrounds/intro_3.jpg",
 			opacity: 1
 		});
 
-    	this.continueButton = new ButtonView({
+    	this.loginButton = new ButtonView({
 		    superview: this,
 		    width: 190,
 		    height: 125,
 		    x: gameConstants.GAME_WIDTH / 2 - 100,
-		    y: 660,
+		    y: 880,
 		    //images: {
 		      //up: "resources/images/buttons/login_button.png"
 		      //down: "resources/images/buttons/brown_button_down.png"

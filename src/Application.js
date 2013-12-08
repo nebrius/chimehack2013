@@ -10,6 +10,7 @@ import src.views.LeaderboardView as LeaderboardView;
 import src.views.TitleView as TitleView;
 import src.views.Instruction1View as Instruction1View;
 import src.views.Instruction2View as Instruction2View;
+import src.views.Instruction3View as Instruction3View;
 import ui.View as View;
 import ui.StackView as StackView;
 import util.ajax as ajax;
@@ -48,6 +49,7 @@ exports = Class(GC.Application, function () {
 
 		var instruction1View = new Instruction1View();
 		var instruction2View = new Instruction2View();
+		var instruction3View = new Instruction3View();
 		var profileView = new ProfileView();
 		var homeView = new HomeView();
 		var titleView = new TitleView();
@@ -63,6 +65,10 @@ exports = Class(GC.Application, function () {
 		});
 
 		instruction2View.on('Continue', function () {
+			rootView.push(instruction3View);
+		});
+
+		instruction3View.on('Continue', function () {
 			rootView.push(homeView);
 			homeView.load();
 		});

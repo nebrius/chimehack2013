@@ -8,7 +8,6 @@ import menus.views.components.DialogBackgroundView as DialogBackgroundView;
 import src.constants.gameConstants as gameConstants;
 import ui.widget.ButtonView as ButtonView;
 import ui.resource.Image as Image;
-//import src.lib.parseUtil as ParseUtil;
 
 exports = Class(DialogBackgroundView, function (supr) {
 	this.init = function (opts) {
@@ -18,15 +17,6 @@ exports = Class(DialogBackgroundView, function (supr) {
 		this.mapItemType = '';
 
 		supr(this, 'init', arguments);
-
-		//this.style.visible = false;
-
-		//this.parseUtil = new ParseUtil();
-
-		//opts.closeCB = {};
-
-		//this.style.x = 60;
-		//this.style.y = 240;
 
 		this._dialogView = new BoxDialogView({
 			superview: this._dialogContainerView,
@@ -55,10 +45,10 @@ exports = Class(DialogBackgroundView, function (supr) {
 
 		this.background = new ImageView({
 			parent: this._dialogView,
-			x: 10,
-			y: 30,
-			width: 450,
-			height: 400,
+			x: 0,
+			y: 0,
+			width: gameConstants.GAME_WIDTH - 130,
+			height: 600,
 			image: "resources/images/backgrounds/market_info.png",
 			opacity: 1
 		});

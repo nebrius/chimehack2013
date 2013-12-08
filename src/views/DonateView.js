@@ -66,6 +66,115 @@ exports = Class(View, function (supr) {
 				})
 		    }
     	});
+    	
+    	this.selectOneView = new ButtonView({
+    		superview: this,
+    		width: 124,
+    		height: 139,
+    		x: 35,
+    		y: 240,
+		    on: {
+		      up: bind(this, function () {
+		      		this.selectedTwoDollarView.hide();
+		      		this.selectedFiveDollarView.hide();
+		      		this.selectedTenDollarView.hide();
+		      		this.selectedOneDollarView.show();
+				})		      
+		    }
+    	});
+    	
+    	this.selectTwoView = new ButtonView({
+    		superview: this,
+    		width: 124,
+    		height: 139,
+    		x: 159,
+    		y: 240,
+		    on: {
+		      up: bind(this, function () {
+		      		this.selectedOneDollarView.hide();
+		      		this.selectedFiveDollarView.hide();
+		      		this.selectedTenDollarView.hide();
+		      		this.selectedTwoDollarView.show();
+				})		      
+		    }
+    	});
+    	
+    	this.selectFiveView = new ButtonView({
+    		superview: this,
+    		width: 124,
+    		height: 139,
+    		x: 293,
+    		y: 240,
+		    on: {
+		      up: bind(this, function () {
+		      		this.selectedOneDollarView.hide();
+		      		this.selectedTwoDollarView.hide();
+		      		this.selectedTenDollarView.hide();
+		      		this.selectedFiveDollarView.show();
+				})		      
+		    }
+    	});
+    	
+    	this.selectTenView = new ButtonView({
+    		superview: this,
+    		width: 124,
+    		height: 139,
+    		x: 417,
+    		y: 240,
+		    on: {
+		      up: bind(this, function () {
+		      		this.selectedOneDollarView.hide();
+		      		this.selectedTwoDollarView.hide();
+		      		this.selectedFiveDollarView.hide();
+		      		this.selectedTenDollarView.show();
+				})		      
+		    }
+    	});
+    	
+    	this.selectedOneDollarView = new ImageView({
+    		parent: this,
+			x: 35,
+			y: 240,
+			width: 124,
+			height: 139,
+			visible: false,
+			image: "resources/images/donation/one_selected.png",
+			opacity: 1
+    	});
+    	
+    	this.selectedTwoDollarView = new ImageView({
+    		parent: this,
+			x: 159,
+			y: 240,
+			width: 124,
+			height: 139,
+			visible: false,
+			image: "resources/images/donation/two_selected.png",
+			opacity: 1
+    	});
+    	
+    	this.selectedFiveDollarView = new ImageView({
+    		parent: this,
+			x: 293,
+			y: 240,
+			width: 124,
+			height: 139,
+			visible: false,
+			image: "resources/images/donation/five_selected.png",
+			opacity: 1
+    	});
+
+		this.selectedTenDollarView = new ImageView({
+    		parent: this,
+			x: 417,
+			y: 240,
+			width: 124,
+			height: 139,
+			visible: false,
+			image: "resources/images/donation/ten_selected.png",
+			opacity: 1
+    	});
+
 
 		this.customAmountEditView = new TextEditView({
 			superview: this,
@@ -102,7 +211,7 @@ exports = Class(View, function (supr) {
 			x: gameConstants.GAME_WIDTH / 2 - 100,
 			y: 670,
 			images: {
-				up: "resources/images/buttons/login_button.png"
+				up: "resources/images/buttons/donate_button.png"
 				//down: "resources/images/buttons/brown_button_down.png"
 			},
 			on: {

@@ -85,10 +85,12 @@ exports = Class(View, function (supr) {
 			width: 456,
 			height: 80,
 			fontWeight: "bold",
+			text:"amy",
 			//horizontalAlign: "center",
 			color: "#ffffff",
 			hintColor: "#ffffff",
-			hint: "Enter Username"
+			hint: "Enter Username",
+			text: "amy"
 		});
 
 		this.accessCodeEditView = new TextEditView({
@@ -118,6 +120,7 @@ exports = Class(View, function (supr) {
 			on: {
 				up: bind(this, function () {
 					login.call(this);
+					//this.emit('Start');
 				})
 			}
 			/*title: "Login",

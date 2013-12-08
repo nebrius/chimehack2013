@@ -27,6 +27,16 @@ exports = Class(View, function (supr) {
 
 	this.designView = function() {
 
+		this.background = new ImageView({
+			parent: this,
+			x: 0,
+			y: 0,
+			width: gameConstants.GAME_WIDTH,
+			height: gameConstants.GAME_HEIGHT,
+			image: "resources/images/backgrounds/leaderboard_bg.jpg",
+			opacity: 1
+		});
+
 		GLOBAL.gameData.on('loaded', function () {
 			this.usernameText.setText(GLOBAL.gameData.student.get('name'));
 			GLOBAL.gameData.donationCollection.on('added', function () {
@@ -227,12 +237,12 @@ exports = Class(View, function (supr) {
 
 		this.schoolButton = new ButtonView({
 			superview: this,
-			width: 80,
-			height: 80,
-			x: 10,
-			y: 220,
+			width: 120,
+			height: 100,
+			x: 25,
+			y: 250,
 			size: 26,
-			title: 'School',
+			title: '',
 			on: {
 				up: bind(this, function () {
 					this.category = 'school';
@@ -243,12 +253,12 @@ exports = Class(View, function (supr) {
 
 		this.gradeButton = new ButtonView({
 			superview: this,
-			width: 80,
-			height: 80,
+			width: 120,
+			height: 100,
 			x: 160,
-			y: 220,
+			y: 255,
 			size: 26,
-			title: 'Grade',
+			title: '',
 			on: {
 				up: bind(this, function () {
 					this.category = 'grade';
@@ -259,12 +269,12 @@ exports = Class(View, function (supr) {
 
 		this.classButton = new ButtonView({
 			superview: this,
-			width: 80,
-			height: 80,
+			width: 120,
+			height: 100,
 			x: 310,
-			y: 220,
+			y: 260,
 			size: 26,
-			title: 'Class',
+			title: '',
 			on: {
 				up: bind(this, function () {
 					this.category = 'class';
@@ -275,12 +285,12 @@ exports = Class(View, function (supr) {
 
 		this.classButton = new ButtonView({
 			superview: this,
-			width: 80,
-			height: 80,
+			width: 120,
+			height: 100,
 			x: 460,
-			y: 220,
+			y: 260,
 			size: 26,
-			title: 'Classmates',
+			title: '',
 			on: {
 				up: bind(this, function () {
 					this.category = 'classmates';
@@ -302,7 +312,7 @@ exports = Class(View, function (supr) {
 			},
 			on: {
 			  up: bind(this, function () {
-					//this.emit('Donate');
+					this.emit('Back');
 				})
 			}
 		});
