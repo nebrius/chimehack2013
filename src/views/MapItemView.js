@@ -92,6 +92,7 @@ exports = Class(DialogBackgroundView, function (supr) {
 		    },
 		    on: {
 		      up: bind(this, function () {
+		      		this.parent.mapItemView.hide();
 		      		this.parent.emit('Donate');
 				})
 		    }
