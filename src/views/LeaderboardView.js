@@ -7,6 +7,7 @@ import ui.ImageView as ImageView;
 import ui.widget.ButtonView as ButtonView;
 import ui.ScrollView as ScrollView;
 import src.models.Donation as Donation;
+import src.constants.gameConstants as gameConstants;
 
 exports = Class(View, function (supr) {
 
@@ -93,17 +94,11 @@ exports = Class(View, function (supr) {
 							break;
 						case 'classmates':
 							var donationStudent = GLOBAL.gameData.studentCollection.modelWithId(donation.get('student'));
-							if (donationStudent.get('school') == student.get('school') &&
-								donationStudent.get('grade') == student.get('grade') &&
-								donationStudent.get('classname') == student.get('classname')
-							) {
-								var name = donationStudent.get('name');
-								if (!buckets[name]) {
-									buckets[name] = 0;
-								}
-								buckets[name] += donation.get('amount');
+							var name = donationStudent.get('name');
+							if (!buckets[name]) {
+								buckets[name] = 0;
 							}
-							break;
+							buckets[name] += donation.get('amount');
 							break;
 					}
 				}.bind(this));
@@ -131,38 +126,38 @@ exports = Class(View, function (supr) {
 			}.bind(this),
 			rows = [],
 			createRow = function(position, name, amount) {
-				var ROW_HEIGHT = 50;
+				var ROW_HEIGHT = 110;
 				var container = new View({
 						superview: this,
 						height: ROW_HEIGHT,
 						x: 0,
-						y: position * ROW_HEIGHT + 300
+						y: position * ROW_HEIGHT + 342
 					});
 				rows.push(container);
 				new TextView({
 					parent: container,
-					x: 10,
+					x: 45,
 					y: 0,
 					width: 200,
 					height: ROW_HEIGHT,
 					horizontalAlign: 'left',
 					text: '$' + amount.toFixed(2),
 					fontFamily: gameConstants.MAIN_FONT,
-					size: 28,
-					color: '#000000',
+					color: '#3e3e3e',
+					size: 32,
 					canHandleEvents: false
 				});
 				new TextView({
 					parent: container,
 					x: 200,
 					y: 0,
-					width: 200,
+					width: 400,
 					height: ROW_HEIGHT,
 					horizontalAlign: 'left',
 					text: name,
 					fontFamily: gameConstants.MAIN_FONT,
-					size: 28,
-					color: '#000000',
+					color: '#3e3e3e',
+					size: 32,
 					canHandleEvents: false
 				});
 			}.bind(this);
