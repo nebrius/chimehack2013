@@ -8,7 +8,8 @@ import device;
 import ui.ScrollView as ScrollView;
 import src.views.MapView as MapView;
 import src.views.MapItemView as MapItemView;
-
+import src.views.LevelUpView as LevelUpView;
+import ui.SpriteView as SpriteView;
 import src.models.Donation as Donation;
 
 exports = Class(View, function (supr) {
@@ -72,6 +73,12 @@ exports = Class(View, function (supr) {
  			parent: this
 		});
 		this.addSubview(this.mapItemView);
+
+
+ 		this.levelUpView = new LevelUpView({
+ 			parent: this
+		});
+		this.addSubview(this.levelUpView);
 
 		this.background = new ImageView({
 			parent: this,

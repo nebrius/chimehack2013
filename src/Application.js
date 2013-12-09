@@ -12,6 +12,7 @@ import src.views.SocialView as SocialView;
 import src.views.Instruction1View as Instruction1View;
 import src.views.Instruction2View as Instruction2View;
 import src.views.Instruction3View as Instruction3View;
+import src.views.LevelUpView as LevelUpView;
 import ui.View as View;
 import ui.StackView as StackView;
 import util.ajax as ajax;
@@ -76,7 +77,9 @@ exports = Class(GC.Application, function () {
 		});
 
 		var leaderboardView = new LeaderboardView();
-		var donateView = new DonateView();
+		var donateView = new DonateView({
+			homeView: homeView
+		});
 
 		homeView.on('Profile', function () {
 			rootView.push(profileView);

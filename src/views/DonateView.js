@@ -12,6 +12,8 @@ exports = Class(View, function (supr) {
 
 	this.init = function(opts) {
 
+		this.homeView = opts.homeView;
+
 		opts = merge(opts, {
 			x: 0,
 			y: 0,
@@ -220,7 +222,7 @@ exports = Class(View, function (supr) {
 			},
 			on: {
 				up: bind(this, function () {
-					var email = this.emailEditView.getText(),
+					/*var email = this.emailEditView.getText(),
 						donor = GLOBAL.gameData.donorCollection.modelWithId(email);
 					function saveDonation() {
 						GLOBAL.gameData.donationCollection.add(new Donation({
@@ -243,7 +245,12 @@ exports = Class(View, function (supr) {
 						}.bind(this));
 					} else {
 						saveDonation.call(this);
-					}
+					}*/
+
+					this.emit('Back');
+					
+		      		this.homeView.levelUpView.show();
+		      		this.homeView.levelUpView.startAnimation();
 				})
 			}
 		});

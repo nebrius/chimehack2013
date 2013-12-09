@@ -1,3 +1,4 @@
+import animate;
 import ui.View as View;
 import ui.TextView as TextView;
 import ui.ImageView as ImageView;
@@ -8,11 +9,10 @@ import menus.views.components.DialogBackgroundView as DialogBackgroundView;
 import src.constants.gameConstants as gameConstants;
 import ui.widget.ButtonView as ButtonView;
 import ui.resource.Image as Image;
+import ui.SpriteView as SpriteView;
 
 exports = Class(DialogBackgroundView, function (supr) {
 	this.init = function (opts) {
-
-		this.parent = opts.parent;
 
 		this.mapItemType = '';
 
@@ -29,21 +29,23 @@ exports = Class(DialogBackgroundView, function (supr) {
 			backCB: opts.backCB ? bind(this, 'hide', opts.backCB) : false
 		});
 
-		//var itemStyle = menuConstants.MENU_ITEM;
-		//var textStyle = menuConstants.MENU_TEXT;
-		//var menu = this;
 		this.designView();
 	};
 
-	this.setMapItemType = function(type) {
-		
-		this.locatation_img = new Image({url: "resources/images/backgrounds/" + type + "_info.png"});
-		this.background.setImage(this.locatation_img);
+	this.startAnimation = function() {
+		animate(this).wait(500)
+		.then(bind(this, function() {
+			this.avatarView.startAnimation('default', {loop: false, callback: this.showAvatar(this)});	
+		}))
+	}
+
+	this.showAvatar = function(that) {
+		that.avatarImage.style.visible = true;
 	}
 
 	this.designView = function() {
 
-		this.background = new ImageView({
+		/*this.background = new ImageView({
 			parent: this._dialogView,
 			x: 0,
 			y: 0,
@@ -51,7 +53,7 @@ exports = Class(DialogBackgroundView, function (supr) {
 			height: 600,
 			image: "resources/images/backgrounds/market_info.png",
 			opacity: 1
-		});
+		});*/
 
 		this.closeButton = new ButtonView({
 		    superview: this._dialogView,
@@ -66,26 +68,69 @@ exports = Class(DialogBackgroundView, function (supr) {
 		    on: {
 		      up: bind(this, function () {
 		      		this.hide();
+		      		this.avatarImage.style.visible = false;
 				})
 		    }
     	});
 
-		this.donateButton = new ButtonView({
+		this.logoutButton = new ButtonView({
 		    superview: this._dialogView,
-		    width: gameConstants.GAME_WIDTH - 104,
-		    height: 165,
-		    x: 0,
-		    y: 455,
+		    width: 140,
+		    height: 60,
+		    x: 180,
+		    y: 550,
 		    images: {
-		      up: "resources/images/buttons/makeachange_button.png"
-		      //down: "resources/images/buttons/brown_button_down.png"
+		      up: "resources/images/buttons/brown_button_up.png",
+		      down: "resources/images/buttons/brown_button_down.png"
+		    },
+		    scaleMethod: "9slice",
+		    sourceSlices: {
+		      horizontal: {left: 80, center: 116, right: 80},
+		      vertical: {top: 10, middle: 80, bottom: 10}
+		    },
+		    destSlices: {
+		      horizontal: {left: 40, right: 40},
+		      vertical: {top: 4, bottom: 4}
 		    },
 		    on: {
 		      up: bind(this, function () {
-		      		this.parent.emit('Donate');
-				})
+		 
+					this.hide();
+					this.avatarImage.style.visible = false;
+				})		      
+		    },
+		    title: "Ok",
+		    text: {
+		      color: "#ffffff",
+		      size: 24,
+		      autoFontSize: false,
+		      autoSize: false
 		    }
     	});
+
+    	this.avatarImage = new ImageView({
+    		parent: this._dialogView,
+			x: 100,
+			y: 100,
+			width: 290,
+			height: 370,
+			image: "resources/images/animation/avatar_default_13.png",
+			visible: false
+    	})
+
+		this.avatarView = new SpriteView({
+		  superview: this._dialogView,
+		  loop: false,
+		  x: 100,
+		  y: 100,
+		  width: 290,
+		  height: 370,
+		  url: 'resources/images/animation/avatar',
+		  frameRate: 8,
+		  zIndex: 100
+		});
+
+			
 
 	}
 });

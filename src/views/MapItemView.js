@@ -19,15 +19,6 @@ exports = Class(DialogBackgroundView, function (supr) {
 
 		supr(this, 'init', arguments);
 
-		//this.style.visible = false;
-
-		//this.parseUtil = new ParseUtil();
-
-		//opts.closeCB = {};
-
-		//this.style.x = 60;
-		//this.style.y = 240;
-
 		this._dialogView = new BoxDialogView({
 			superview: this._dialogContainerView,
 			x: 53,
@@ -39,9 +30,6 @@ exports = Class(DialogBackgroundView, function (supr) {
 			backCB: opts.backCB ? bind(this, 'hide', opts.backCB) : false
 		});
 
-		//var itemStyle = menuConstants.MENU_ITEM;
-		//var textStyle = menuConstants.MENU_TEXT;
-		//var menu = this;
 		this.designView();
 	};
 

@@ -119,17 +119,10 @@ exports = Class(View, function (supr) {
 			},
 			on: {
 				up: bind(this, function () {
-					login.call(this);
-					//this.emit('Start');
+					//login.call(this);
+					this.emit('Start');
 				})
 			}
-			/*title: "Login",
-			text: {
-			  color: "#ffffff",
-			  size: 36,
-			  autoFontSize: false,
-			  autoSize: false
-			}*/
 		});
 
 		this.errorDialog = new ErrorView({
