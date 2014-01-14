@@ -35,10 +35,10 @@ exports = Class(View, function (supr) {
 
     	this.loginButton = new ButtonView({
 		    superview: this,
-		    width: 190,
-		    height: 125,
-		    x: gameConstants.GAME_WIDTH / 2 - 100,
-		    y: 880,
+		    width: 576,
+		    height: 1024,
+		    x: 0,
+		    y: 0,
 		    //images: {
 		      //up: "resources/images/buttons/login_button.png"
 		      //down: "resources/images/buttons/brown_button_down.png"
